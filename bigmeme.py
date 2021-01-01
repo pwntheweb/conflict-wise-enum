@@ -1,5 +1,4 @@
 import requests
-import random
 
 pagenav_url = "https://courses.3rdmil.com/pagenavigation.php"
 view_url = "https://courses.3rdmil.com/mod/surveymil/view.php?id="
@@ -22,11 +21,8 @@ for i in range(100):
     viewkey = viewkey + 1
     print(str(viewkey))
     req = requests.post(pagenav_url,data=data,headers=headers)
-    print("POST1 "+req.url+" "+str(req.status_code))
     req = requests.get(view_url+str(viewkey),headers=headers)
-    print("GET "+req.url+" "+str(req.status_code))
     input_lines = []
-    open("temp.txt","w").write(req.text)
     memes = req.text.splitlines()
     dank = {}
     for line in memes:
@@ -39,4 +35,3 @@ for i in range(100):
         except:
             "do nothing"
     req = requests.post(view_url+str(viewkey),headers=headers,data=dank)
-    print("POST2 "+req.url+" "+str(req.status_code))
